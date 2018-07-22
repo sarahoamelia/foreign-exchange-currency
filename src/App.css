@@ -12,6 +12,7 @@
   height: 150px;
   padding: 20px;
   width: auto;
+  background-color: aliceblue;
 }
 
 .App-title {
@@ -34,7 +35,7 @@
 
 .Added-label {
   text-align: left;
-  -webkit-margin-before: 3.67em !important;
+  -webkit-margin-before: 3.05em !important;
 }
 
 .Base-label {
@@ -55,7 +56,12 @@
 }
 
 .Currency-display {
-  text-align: left !important;
+  text-align: right !important;
+}
+
+.App-more-currencies {
+  height: 150px;
+  padding-top: 10px;
 }
 
 .Input-calculate {
@@ -63,6 +69,10 @@
   font-size: 19px !important;
   text-align: right;
 }
+.MuiFormControl-marginNormal-98 {
+  width: 100% !important;
+}
+
 
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }

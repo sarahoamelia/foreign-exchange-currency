@@ -29,10 +29,6 @@ class App extends Component {
 
   }
 
-  handleClick = () => {
-    console.log('add more button clicked');
-  }
-
   handleChange = event => {
     return this.setState({
       code: event.target.value
@@ -48,39 +44,12 @@ class App extends Component {
   }
 
   calculate = (number, data) => {
-    console.log(number);
     let display = this.state.display;
     display.map(value => {
       let amount = value.current * number;
       value.amount = amount.toLocaleString();
     });
     return this.updateDisplay(display)
-  }
-
-  checkIfExistInWaitingList(code, waiting, display) {
-    let index = this.getIndex(code, waiting);
-    console.log('index', index);
-    if (index > -1) {
-      waiting[index].currencyDisplay = waiting[index].current.toLocaleString();
-      display.push(waiting[index]);
-      waiting.splice(index, 1);
-      this.updateDisplay(display);
-      this.updateWaiting(waiting);
-    }
-    else {
-      return this.setState({
-        selectedValue: "No more Currency"
-      })
-      
-    }
-  }
-  checkIfExistInDisplayList(code, display, waiting) {
-    let index = this.getIndex(code, display);
-    console.log('index: ', index);
-    waiting.push(display[index]);
-    display.splice(index, 1);
-    this.updateDisplay(display);
-    this.updateWaiting(waiting);
   }
 
   handleSelect = (event) => {
@@ -90,7 +59,6 @@ class App extends Component {
   }
 
   handleSubmit = () => {
-    console.log('selectedValue: ', this.state.selectedValue)
     let code = this.state.selectedValue;
     let display = this.state.display;
     let waiting = this.state.waiting;
@@ -115,8 +83,32 @@ class App extends Component {
     }
   }
 
+  checkIfExistInWaitingList(code, waiting, display) {
+    let index = this.getIndex(code, waiting);
+    if (index > -1) {
+      waiting[index].currencyDisplay = waiting[index].current.toLocaleString();
+      display.push(waiting[index]);
+      waiting.splice(index, 1);
+      this.updateDisplay(display);
+      this.updateWaiting(waiting);
+    }
+    else {
+      return this.setState({
+        selectedValue: "No more Currency"
+      })
+
+    }
+  }
+  
+  checkIfExistInDisplayList(code, display, waiting) {
+    let index = this.getIndex(code, display);
+    waiting.push(display[index]);
+    display.splice(index, 1);
+    this.updateDisplay(display);
+    this.updateWaiting(waiting);
+  }
+
   removeItem(code) {
-    console.log('code: ', code)
     let codeChosen = code;
     let display = this.state.display;
     let waiting = this.state.waiting;
@@ -124,9 +116,6 @@ class App extends Component {
   }
 
   getIndex(value, arr) {
-    console.log('value: ', value);
-    console.log('arr: ', arr);
-
     if (arr.length > 0) {
       for (var i = 0; i < arr.length; i++) {
         if (arr[i].code === value) {
@@ -141,8 +130,6 @@ class App extends Component {
   componentWillMount() {
     let display = [];
     let waiting = [];
-    // this.setState({code: this.props.code})
-    console.log('state in componentDidMount', this.state)
     fetch('https://v3.exchangerate-api.com/bulk/b7689f339cc4d3a97c41c1fa/USD').then(results => {
       return results.json();
     }).then(data => {
@@ -287,7 +274,6 @@ class App extends Component {
               <h5 className="Added-label">.00</h5>
             </Grid>
           </Grid>
-          <Divider />
         </header>
 
 
@@ -309,23 +295,25 @@ class App extends Component {
             })
           }
           {/* <Notifier /> */}
-          <FormControl className="Select-currencies">
-            <InputLabel htmlFor="add-country">Add More Currencies</InputLabel>
-            <Select
-              value={this.state.selectedValue}
-              onChange={this.handleSelect}
-              autoWidth
-            >
-              {
-                this.state.waiting.map(data => {
-                  return <MenuItem key={data.code} className="List-value" value={data.code}>{data.code}</MenuItem>
-                })
-              }
-            </Select>
-            <Button className="Button-submit" variant="contained" onClick={this.handleSubmit} color="primary">
-              Submit
+          <div className="App-more-currencies">
+            <FormControl className="Select-currencies">
+              <InputLabel htmlFor="add-country">Add More Currencies</InputLabel>
+              <Select
+                value={this.state.selectedValue}
+                onChange={this.handleSelect}
+                autoWidth
+              >
+                {
+                  this.state.waiting.map(data => {
+                    return <MenuItem key={data.code} className="List-value" value={data.code}>{data.code}</MenuItem>
+                  })
+                }
+              </Select>
+              <Button className="Button-submit" variant="contained" onClick={this.handleSubmit} color="primary">
+                Submit
           </Button>
-          </FormControl>
+            </FormControl>
+          </div>
         </div>
       </div>
     );
