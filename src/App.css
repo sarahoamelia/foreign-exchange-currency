@@ -1,0 +1,70 @@
+.App {
+  text-align: center;
+  width: 100%;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  height: 150px;
+  padding: 20px;
+  width: auto;
+}
+
+.App-title {
+  font-size: 1.5em;
+  width: 20%;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+.App-list {
+  width: 100%;
+  background-color: white; 
+}
+
+.Calculate-field {
+  width: 100%;
+}
+
+.Added-label {
+  text-align: left;
+  -webkit-margin-before: 3.67em !important;
+}
+
+.Base-label {
+  text-align: right !important;
+  -webkit-margin-before: 3.05em !important; 
+}
+
+.Select-currencies {
+  width: 70% !important;
+}
+
+.Button-submit {
+  margin-top: 3% !important;
+}
+
+.MuiMenu-paper-140 {
+  width: 70%;
+}
+
+.Currency-display {
+  text-align: left !important;
+}
+
+.Input-calculate {
+  font-weight: bold !important;
+  font-size: 19px !important;
+  text-align: right;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
