@@ -9,4 +9,4 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - [To build from docker]
 - `docker build -t sarahamelia/fec .`
 - [To running from docker]
-- `docker run -it   -v ${PWD}:/usr/src/app   -v /usr/src/app/node_modules   -p 3000:3000   --rm   sarahoamelia/fec`
+- `docker run -it   -v ${PWD}:/usr/src/app   -v /usr/src/app/node_modules   -p 3000:3000   --rm   sarahamelia/fec`
